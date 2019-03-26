@@ -56,7 +56,8 @@ build-docker:
 build-windows-dev: export GOARCH=amd64
 build-windows-dev:
 	@GOOS=windows go build -mod=vendor -v \
-		--ldflags="-w -X main.LogLevel=debug -X main.AppName=$(NAME) \
+		-gcflags="all=-N -l" \
+		--ldflags="-X main.LogLevel=debug -X main.AppName=$(NAME) \
 		-X main.Version=$(VERSION) -X main.Revision=$(REVISION)" \
 		-o bin/dev/windows/amd64/$(NAME).exe cmd/$(NAME)/main.go
 
@@ -64,7 +65,8 @@ build-linux-dev: export GOARCH=amd64
 build-linux-dev: export CGO_ENABLED=0
 build-linux-dev:
 	@GOOS=linux go build -mod=vendor -v \
-		--ldflags="-w -X main.LogLevel=debug -X main.AppName=$(NAME) \
+		-gcflags="all=-N -l" \
+		--ldflags="-X main.LogLevel=debug -X main.AppName=$(NAME) \
 		-X main.Version=$(VERSION) -X main.Revision=$(REVISION)" \
 		-o bin/dev/linux/amd64/$(NAME) cmd/$(NAME)/main.go
 
@@ -72,7 +74,8 @@ build-mac-dev: export GOARCH=amd64
 build-mac-dev: export CGO_ENABLED=0
 build-mac-dev:
 	@GOOS=darwin go build -mod=vendor -v \
-		--ldflags="-w -X main.LogLevel=debug -X main.AppName=$(NAME) \
+		-gcflags="all=-N -l" \
+		--ldflags="-X main.LogLevel=debug -X main.AppName=$(NAME) \
 		-X main.Version=$(VERSION) -X main.Revision=$(REVISION)" \
 		-o bin/dev/darwin/amd64/$(NAME) cmd/$(NAME)/main.go
 
